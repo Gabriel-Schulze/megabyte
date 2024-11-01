@@ -8,6 +8,6 @@ create table tb_fornecedor(
     nr_telefone varchar(15) not null,
     id_usuario tinyint not null,
     
-    constraint pk_fornecedor primary key(id_fornecedor)
+    constraint pk_fornecedor primary key(id_fornecedor),
     constraint fk_fornecedor_usuario foreign key(id_usuario) references tb_usuario(id_usuario)
 )
