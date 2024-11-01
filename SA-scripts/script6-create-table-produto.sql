@@ -7,9 +7,11 @@ create table tb_produto(
     qt_produto smallint not null,
     id_subcategoria tinyint not null,
     id_fornecedor tinyint not null,
+    id_usuario tinyint not null,
     
     constraint pk_produto primary key(cd_produto),
     constraint fk_produto_subcategoria foreign key(id_subcategoria) references tb_subcategoria(id_subcategoria),
-    constraint fk_produto_fornecedor foreign key(id_fornecedor) references tb_fornecedor(id_fornecedor)
+    constraint fk_produto_fornecedor foreign key(id_fornecedor) references tb_fornecedor(id_fornecedor),
+    constraint fk_produto_usuario foreign key(id_usuario) references tb_usuario(id_usuario),
 
 )
