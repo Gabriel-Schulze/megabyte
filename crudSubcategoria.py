@@ -10,11 +10,11 @@ def create_subcategoria(descricao,categoria):
     cursor.close()
     conn.close()
 
-def read_subcategoria():
+def read_subcategoria(categoria):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "select * from tb_subcategoria"
-    cursor.execute(query)
+    query = "select * from tb_subcategoria where id_categoria = %s"
+    cursor.execute(query, (categoria,))
     result = cursor.fetchall()
     cursor.close()
     conn.close()
