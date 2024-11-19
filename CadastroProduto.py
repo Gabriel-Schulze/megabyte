@@ -1,5 +1,5 @@
 from customtkinter import *
-from tkinter import Frame
+from tkinter import Frame,ttk
 from crudCategoria import read_categoria
 from crudFornecedor import read_fornecedor
 from crudSubcategoria import read_subcategoria
@@ -41,8 +41,11 @@ class CadastroProduto:
         CTkLabel(self.frame5, text="Subcategoria:", font=("Open Sans",26),anchor=E, width=200).grid(column=1,row=1)
         CTkLabel(self.frame6, text="Fornecedor:", font=("Open Sans",26),anchor=E, width=200).grid(column=1,row=1)
 
-        self.codigo_entry = CTkEntry(self.frame1,font=("Open Sans",16),width=300)
+        self.codigo_entry = CTkEntry(self.frame1,font=("Open Sans",16),width=190)
         self.codigo_entry.grid(column=2,row=1)
+        
+        self.codigo_btn = CTkButton(self.frame1, text="GERAR CÓDIGO",width=50)
+        self.codigo_btn.grid(column=3,row=1,padx=(5,0))
     
         self.descricao_entry = CTkEntry(self.frame2,font=("Open Sans",16),width=300)
         self.descricao_entry.grid(column=2,row=1, sticky=W)
@@ -50,13 +53,15 @@ class CadastroProduto:
         self.valor_entry = CTkEntry(self.frame3,font=("Open Sans",16),width=300)
         self.valor_entry.grid(column=2,row=1)
 
-        self.categoria_combobox = CTkComboBox(self.frame4, values=[x[1] for x in self.data_categorias],width=300,command=self.callback)
+        self.categoria_combobox = ttk.Combobox(self.frame4, values=[x[1] for x in self.data_categorias],width=46, state="readonly")
         self.categoria_combobox.grid(column=2,row=1)
+        self.categoria_combobox.bind("<<ComboboxSelected>>", self.callback)
+        
 
-        self.subcategoria_combobox = CTkComboBox(self.frame5, variable=self.teste,width=300)
+        self.subcategoria_combobox = ttk.Combobox(self.frame5,width=46, state="readonly")
         self.subcategoria_combobox.grid(column=2,row=1)
         
-        self.fornecedor_combobox = CTkComboBox(self.frame6, values=[x[1] for x in self.data_fornecedor],width=300)
+        self.fornecedor_combobox = ttk.Combobox(self.frame6, values=[x[1] for x in self.data_fornecedor],width=46)
         self.fornecedor_combobox.grid(column=2,row=1)
         
         self.btn_voltar = CTkButton(self.frame7, text="Voltar ao menu", width=10,command=self.voltarAoMenu, )
@@ -65,12 +70,15 @@ class CadastroProduto:
         self.btn_cadastrar = CTkButton(self.frame7, text="Cadastrar",width=10 ,command=self.cadastrarProduto)
         self.btn_cadastrar.grid(column=2,row=1,sticky=E)
         
+        
     def callback(self, event=None):
+        self.subcategoria_combobox.configure(state="normal")
+        self.subcategoria_combobox.delete(0,END)
         categoria = self.categoria_combobox.get()
         id_categoria = [x for x in self.data_categorias if x[1] == categoria][0][0]
         values = read_subcategoria(id_categoria)
         
-        self.subcategoria_combobox.configure(values=[x[1] for x in values])
+        self.subcategoria_combobox.configure(values=[x[1] for x in values],state="readonly")
 
     def voltarAoMenu(self):
         pass
