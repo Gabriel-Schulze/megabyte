@@ -67,8 +67,8 @@ class editarProduto:
         self.btn_voltar = CTkButton(self.frame7, text="Voltar ao menu", width=10,command=self.voltarAoMenu, )
         self.btn_voltar.grid(column=1,row=1, pady=10,sticky=W)
 
-        self.btn_cadastrar = CTkButton(self.frame7, text="Cadastrar",width=10 ,command=self.cadastrarProduto)
-        self.btn_cadastrar.grid(column=2,row=1,sticky=E)
+        self.btn_editar = CTkButton(self.frame7, text="Editar",width=10 ,command=self.cadastrarProduto)
+        self.btn_editar.grid(column=2,row=1,sticky=E)
         
         
     def callback(self, event=None):
