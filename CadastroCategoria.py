@@ -31,7 +31,7 @@ class CadastroCategoria:
         self.categoria_combobox.grid(column=2,row=1)
         self.categoria_combobox.bind("<<ComboboxSelected>>", self.callback)
         
-        self.subcategoria_combobox = ttk.Combobox(self.frame2,width=46, state="readonly")
+        self.subcategoria_combobox = CTkEntry(self.frame2,width=300)
         self.subcategoria_combobox.grid(column=2,row=1)
         
      
@@ -43,13 +43,7 @@ class CadastroCategoria:
         
     
     def callback(self, event=None):
-        self.subcategoria_combobox.configure(state="normal")
-        self.subcategoria_combobox.delete(0,END)
-        categoria = self.categoria_combobox.get()
-        id_categoria = [x for x in self.data_categorias if x[1] == categoria][0][0]
-        values = read_subcategoria(id_categoria)
-        
-        self.subcategoria_combobox.configure(values=[x[1] for x in values],state="readonly")
+        pass
     
     def voltarAoMenu(self):
         pass
