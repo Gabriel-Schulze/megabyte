@@ -19,6 +19,12 @@ class Configuracoes:
         self.frame3.pack()
         self.frame4 = Frame(self.root)
         self.frame4.pack()
+        
+        self.create_widget()
+        
+    
+    def create_widget(self):
+        pass
     
     
     
