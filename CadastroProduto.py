@@ -81,7 +81,7 @@ class CadastroProduto:
         self.subcategoria_combobox.configure(values=[x[1] for x in values],state="readonly")
 
     def voltarAoMenu(self):
-        pass
+        self.root.destroy()
 
     def cadastrarProduto(self):
         pass

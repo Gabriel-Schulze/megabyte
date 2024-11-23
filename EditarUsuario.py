@@ -58,7 +58,7 @@ class CadastroUsuario:
         self.btn_cadastrar.grid(column=2,row=1,sticky=E)
 
     def voltarAoMenu(self):
-        pass
+        self.root.destroy()
 
     def cadastrarUsuario(self):
         pass

@@ -1,13 +1,12 @@
 from customtkinter import *
 from tkinter import Frame,ttk
 from crudCategoria import read_categoria
-from crudSubcategoria import read_subcategoria
 
 class CadastroCategoria:
     def __init__(self,root:CTk):
         self.root = root
-        self.root.title("Cadastro de Categoria")
-        self.root.geometry('600x400+300+80')
+        #self.root.title("Cadastro de Categoria")
+        #self.root.geometry('600x400+600+80')
 
         CTkLabel(self.root,text="Cadastro de Categoria",font=("Open Sans bold",28)).pack(pady=(30,10))#grid(column=1,row=1, columnspan=2, pady=(0,30))
 
@@ -46,7 +45,7 @@ class CadastroCategoria:
         pass
     
     def voltarAoMenu(self):
-        pass
+        self.root.destroy()
 
     def cadastrarProduto(self):
         pass

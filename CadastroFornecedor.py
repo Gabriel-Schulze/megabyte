@@ -49,7 +49,7 @@ class CadastroFornecedor:
         
 
     def voltarAoMenu(self):
-        pass
+        self.root.destroy()
 
     def cadastrarProduto(self):
         pass
