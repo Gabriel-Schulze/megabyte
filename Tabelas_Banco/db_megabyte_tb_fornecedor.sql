@@ -32,7 +32,7 @@ CREATE TABLE `tb_fornecedor` (
   PRIMARY KEY (`id_fornecedor`),
   KEY `fk_fornecedor_usuario` (`id_usuario`),
   CONSTRAINT `fk_fornecedor_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `tb_fornecedor` (
 
 LOCK TABLES `tb_fornecedor` WRITE;
 /*!40000 ALTER TABLE `tb_fornecedor` DISABLE KEYS */;
-INSERT INTO `tb_fornecedor` VALUES (1,'Nvidia','00.623.','Rua Lorem Ipsum','(47)98765-4321',1);
+INSERT INTO `tb_fornecedor` VALUES (1,'Nvidia','123.456/0001-78','2788 San Tomas Expy, Santa Clara, CA 95051, Estados Unidos','(47)98765-4321',1),(2,'Logitech','987.654/0002-32','Rte Cantonale, 1015 Ecublens, Suíça','(21)863-5511',1),(3,'Micro-Star International','456.987/0003-45','No. 69, Lide St, Zhonghe District, New Taipei City, Taiwan 235','(62)3234-5599',1),(4,'Razer','951.357/0004-65','9-1, 9 Pasteur # 100, Irvine, CA 92618, Estados Unidos','(19)49655-8888',1);
 /*!40000 ALTER TABLE `tb_fornecedor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-19 20:34:56
+-- Dump completed on 2024-11-29 20:37:58

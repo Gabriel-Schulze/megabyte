@@ -46,6 +46,7 @@ CREATE TABLE `tb_produto` (
 
 LOCK TABLES `tb_produto` WRITE;
 /*!40000 ALTER TABLE `tb_produto` DISABLE KEYS */;
+INSERT INTO `tb_produto` VALUES (1,'Galax GeForce GTX 1650',849.99,7,1,1,1),(2,'PNY GeForce RTX 6000',52599.99,1,1,1,1),(3,'Mouse Gamer Logitech G Pro 2',719.99,10,2,2,1),(4,'Mouse Logitech Pebble 2',114.99,50,2,2,1),(5,'Monitor Gamer MSI MAG401QR',3299.99,5,3,3,1),(6,'Monitor Gamer MSI MAG345CQR',2699.99,5,3,3,1),(7,'Teclado Optico Razer Huntsman V2 Tenkeyless',999.99,24,4,4,1),(8,'Teclado Mecanico Razer Blackwidow V4',1999.99,16,4,4,1);
 /*!40000 ALTER TABLE `tb_produto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-19 20:34:56
+-- Dump completed on 2024-11-29 20:37:58

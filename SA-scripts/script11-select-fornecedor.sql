@@ -4,4 +4,5 @@ SELECT
     nr_cnpj,
     ds_endereco,
     nr_telefone
-FROM tb_fornecedor;
+FROM tb_fornecedor
+ORDER BY id_fornecedor;

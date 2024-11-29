@@ -10,3 +10,4 @@ INNER JOIN tb_subcategoria s
 ON (p.id_subcategoria = s.id_subcategoria)
 INNER JOIN tb_categoria c
 ON (c.id_categoria = s.id_categoria)
+ORDER BY p.cd_produto

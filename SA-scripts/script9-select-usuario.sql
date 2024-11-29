@@ -6,3 +6,4 @@ SELECT
     nr_cpf
 FROM 
 	tb_usuario
+ORDER BY id_usuario
