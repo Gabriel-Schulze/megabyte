@@ -6,13 +6,12 @@ from crudFornecedor import *
 
 class TestApp(Frame):
     """Basic test frame for the table"""
-    def __init__(self, parent=None):
+    def __init__(self, user,parent):
         self.parent = parent
-        Frame.__init__(self)
-        self.main = self.master
-        self.main.geometry('800x600+200+100')
-        self.main.title('Table app')
-        f = Frame(self.main)
+        self.user = user
+        self.parent.geometry('800x600+200+100')
+        self.parent.title('Table app')
+        f = Frame(self.parent)
         f.pack(fill=BOTH,expand=1)
 
         
@@ -27,10 +26,13 @@ class TestApp(Frame):
         
         self.table = pt = Table(f, dataframe=df,editable=False)
         pt.show()
-        return
+        
+        
+        Label(f,text=user).grid(column=1,row=1)
 
 
-app = TestApp()
-#launch the app
-app.mainloop()
+if __name__ == "__main__":
+    root = Tk()
+    app = TestApp("TESTE",root)
+    root.mainloop()
 

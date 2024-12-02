@@ -8,7 +8,8 @@ from CadastroUsuario import CadastroUsuario
 
 class Main:
     
-    def __init__(self,root: CTk):
+    def __init__(self,user,root: CTk):
+        self.user = user
         self.root = root
         self.root.resizable(False, False)
         self.root.title("Pagina principal")
@@ -35,26 +36,31 @@ class Main:
         CTkLabel(self.frameAdm, text="Administrador",font=("Open Sans",19)).grid(column=2,row=0)
         
         
-        CTkLabel(self.frame2,font=self.fontMenu ,text="Inicio").grid(column=1,row=1, columnspan=2,pady=(150,20))
-        CTkLabel(self.frame2,font=self.fontMenu ,text="Usuario").grid(column=1,row=2, columnspan=2,pady=(10,20))
-        CTkLabel(self.frame2,font=self.fontMenu ,text="Produtos").grid(column=1,row=3, columnspan=2,pady=(10,20))
-        CTkLabel(self.frame2,font=self.fontMenu ,text="Categorias").grid(column=1,row=4, columnspan=2,pady=(10,20))
-        CTkLabel(self.frame2,font=self.fontMenu ,text="Fornecedores").grid(column=1,row=5, columnspan=2,pady=(10,276))
-        CTkLabel(self.frame2,font=self.fontMenu ,text="Configurações").grid(column=1,row=6, columnspan=2,pady=(10,20))
+        self.inicioLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Inicio")
+        self.inicioLink.grid(column=1,row=1, columnspan=2,pady=(150,20))
+        self.usuarioLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Usuario")
+        self.usuarioLink.grid(column=1,row=2, columnspan=2,pady=(10,20))
+        self.produtoLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Produtos")
+        self.produtoLink.grid(column=1,row=3, columnspan=2,pady=(10,20))
+        self.categLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Categorias")
+        self.categLink.grid(column=1,row=4, columnspan=2,pady=(10,20))
+        self.fornLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Fornecedores")
+        self.fornLink.grid(column=1,row=5, columnspan=2,pady=(10,276))
+        self.configLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Configurações")
+        self.configLink.grid(column=1,row=6, columnspan=2,pady=(10,20))
+        
         CTkLabel(self.frame2,text="Version 1.0").grid(column=1,row=7)
         CTkLabel(self.frame2 ,text="Logoff").grid(column=2,row=7)
+        
+        
         
         
         self.frame3 = Frame(self.frame1,background="red")
         self.frame3.grid(column=2,row=1,rowspan=2)
         
-        Inicio(self.frame3)
+        #Inicio(self.frame3)
         
         
-        
-        
-               
-
     
     def abrirCadastroCategoria(self):
         CadastroCategoria(self.frame2)
@@ -69,5 +75,5 @@ class Main:
         
 if __name__ == "__main__":
     root = CTk()
-    app = Main(root)
+    app = Main("admin",root)
     root.mainloop()
