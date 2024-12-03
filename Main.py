@@ -53,17 +53,20 @@ class Main:
         CTkLabel(self.frame2 ,text="Logoff").grid(column=2,row=7)
         
         
-        
-        
         self.frame3 = Frame(self.frame1,background="red")
         self.frame3.grid(column=2,row=1,rowspan=2)
         
-        #Inicio(self.frame3)
+        self.inicio = Inicio(self.frame3)
+        self.categLink.bind("<Button-1>", lambda e: self.abrirCadastroCategoria())
         
         
     
     def abrirCadastroCategoria(self):
-        CadastroCategoria(self.frame2)
+        # DELETA TODOS OS WIDGETS DESSE FRAME
+        # NECESSARIO LIMPAR O FRAME ANTES DE ADICIONAR OUTRO PAGINA A ELE
+        for widget in self.frame3.winfo_children():
+            widget.destroy()
+        CadastroCategoria(self.frame3)
         
     def abrirCadastroProduto(self):
         self.top = CTkToplevel()
