@@ -1,11 +1,13 @@
 from customtkinter import *
-from tkinter import Frame
+from tkinter import Frame,messagebox
+from crudUsuario import read_usuarioById,update_usuario
 
-class CadastroUsuario:
-    def __init__(self,root:CTk):
+class EditarUsuario:
+    def __init__(self,root:CTk,id):
         self.root = root
         self.root.title("Editar Usuario")
         self.root.geometry('600x400+300+80')
+        self.id = id
 
         CTkLabel(self.root,text="Editar Usuario",font=("Open Sans bold",28)).pack(pady=(30,10))#grid(column=1,row=1, columnspan=2, pady=(0,30))
 
@@ -54,16 +56,39 @@ class CadastroUsuario:
         self.btn_voltar = CTkButton(self.frame6, text="Voltar ao menu", width=10,command=self.voltarAoMenu, )
         self.btn_voltar.grid(column=1,row=1, pady=10,sticky=W)
 
-        self.btn_cadastrar = CTkButton(self.frame6, text="Cadastrar",width=10 ,command=self.cadastrarUsuario)
-        self.btn_cadastrar.grid(column=2,row=1,sticky=E)
+        self.btn_editar = CTkButton(self.frame6, text="Editar",width=10 ,command=self.salvarNovosDados)
+        self.btn_editar.grid(column=2,row=1,sticky=E)
+        
+        self.carregaDados()
+        
+    def carregaDados(self):
+        data = read_usuarioById(self.id)
+        
+        self.nome_entry.insert(0, data[0][0])
+        self.cpf_entry.insert(0, data[0][1])
+        self.telefone_entry.insert(0, data[0][2])
+        self.perfil_combobox.set(data[0][3].capitalize())
+        self.email_entry.insert(0, data[0][4])
+        self.senha_entry.insert(0, data[0][5])
 
     def voltarAoMenu(self):
         self.root.destroy()
 
-    def cadastrarUsuario(self):
-        pass
+    def salvarNovosDados(self):
+        nome = self.nome_entry.get()
+        cpf = self.cpf_entry.get()
+        perfil = self.perfil_combobox.get().lower()
+        telefone = self.telefone_entry.get()
+        email = self.email_entry.get()
+        senha = self.senha_entry.get()
+        
+        update_usuario(self.id,nome,cpf,perfil,telefone,email,senha)
+        messagebox.showinfo("SUCESSO!!","Editado com sucesso!!")
+        
 
 if __name__ == "__main__":
     root = CTk()
-    app = CadastroUsuario(root)
+    app = EditarUsuario(root)
     root.mainloop()
+    
+# id_usuario,nome,cpf,telefone,email,senha

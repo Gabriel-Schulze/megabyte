@@ -13,18 +13,28 @@ def create_usuario(nome,cpf,telefone,email,senha):
 def read_usuario():
     conn = get_connection()
     cursor = conn.cursor()
-    query = "select * from tb_usuario"
+    query = "SELECT id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf FROM tb_usuario ORDER BY id_usuario LIMIT 7"
     cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
     conn.close()
     return result
 
-def update_usuario(id_usuario,nome,cpf,telefone,email,senha):
+def read_usuarioById(id):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "update tb_usuario SET nm_usuario=%s,nr_cpf = %s, nr_telefone=%s,ds_email=%s,ds_senha=%s WHERE id_usuario = %s"
-    cursor.execute(query, (nome,cpf,telefone,email,senha,id_usuario))
+    query = "SELECT nm_usuario,nr_cpf,nr_telefone,ds_perfil,ds_email,ds_senha FROM tb_usuario WHERE id_usuario = %s"
+    cursor.execute(query,(id,))
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
+def update_usuario(id_usuario,nome,cpf,perfil,telefone,email,senha):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "update tb_usuario SET nm_usuario=%s,nr_cpf = %s,ds_perfil = %s, nr_telefone=%s,ds_email=%s,ds_senha=%s WHERE id_usuario = %s"
+    cursor.execute(query, (nome,cpf,perfil,telefone,email,senha,id_usuario))
     conn.commit()
     cursor.close()
     conn.close()

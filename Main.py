@@ -2,9 +2,7 @@ from customtkinter import *
 from tkinter import Frame
 from PIL import Image
 from Inicio import Inicio
-from CadastroCategoria import CadastroCategoria
-from CadastroProduto import CadastroProduto
-from CadastroUsuario import CadastroUsuario
+from UsuarioMain import UsuarioMain
 
 class Main:
     
@@ -17,7 +15,7 @@ class Main:
         
         self.fontMenu = ("Open Sans",22)
     
-        self.frame1 = Frame(self.root,background="red")
+        self.frame1 = Frame(self.root)
         self.frame1.pack()
         
         self.criandoWidgets()
@@ -38,8 +36,13 @@ class Main:
         
         self.inicioLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Inicio")
         self.inicioLink.grid(column=1,row=1, columnspan=2,pady=(150,20))
-        self.usuarioLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Usuario")
-        self.usuarioLink.grid(column=1,row=2, columnspan=2,pady=(10,20))
+        self.inicioLink.bind("<Button-1>", lambda e: self.telaInicio())
+        
+        if self.user == "admin":
+            self.usuarioLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Usuario")
+            self.usuarioLink.grid(column=1,row=2, columnspan=2,pady=(10,20))
+            self.usuarioLink.bind("<Button-1>", lambda e: self.telaUsuario())
+        
         self.produtoLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Produtos")
         self.produtoLink.grid(column=1,row=3, columnspan=2,pady=(10,20))
         self.categLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Categorias")
@@ -53,29 +56,25 @@ class Main:
         CTkLabel(self.frame2 ,text="Logoff").grid(column=2,row=7)
         
         
-        self.frame3 = Frame(self.frame1,background="red")
+        self.frame3 = Frame(self.frame1)
         self.frame3.grid(column=2,row=1,rowspan=2)
         
         self.inicio = Inicio(self.frame3)
-        self.categLink.bind("<Button-1>", lambda e: self.abrirCadastroCategoria())
+        
+     
+    def telaInicio(self):
+        for widgets in self.frame3.winfo_children():
+            widgets.destroy()
+        Inicio(self.frame3)  
+       
+    def telaUsuario(self):
+        for widgets in self.frame3.winfo_children():
+            widgets.destroy()
+        UsuarioMain("admin",self.frame3)  
         
         
-    
-    def abrirCadastroCategoria(self):
-        # DELETA TODOS OS WIDGETS DESSE FRAME
-        # NECESSARIO LIMPAR O FRAME ANTES DE ADICIONAR OUTRO PAGINA A ELE
-        for widget in self.frame3.winfo_children():
-            widget.destroy()
-        CadastroCategoria(self.frame3)
         
-    def abrirCadastroProduto(self):
-        self.top = CTkToplevel()
-        CadastroProduto(self.top)
-        
-    def abrirCadastroUsuario(self):
-        self.top = CTkToplevel()
-        CadastroUsuario(self.top)
-        
+            
 if __name__ == "__main__":
     root = CTk()
     app = Main("admin",root)
