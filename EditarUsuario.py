@@ -1,6 +1,7 @@
 from customtkinter import *
 from tkinter import Frame,messagebox
 from crudUsuario import read_usuarioById,update_usuario
+import re
 
 class EditarUsuario:
     def __init__(self,root:CTk,id):
@@ -81,10 +82,33 @@ class EditarUsuario:
         telefone = self.telefone_entry.get()
         email = self.email_entry.get()
         senha = self.senha_entry.get()
-        
-        update_usuario(self.id,nome,cpf,perfil,telefone,email,senha)
-        messagebox.showinfo("SUCESSO!!","Editado com sucesso!!")
-        
+
+        if nome and cpf and perfil and telefone and email and senha:
+            if len(cpf) >= 11 and len(cpf) <= 14:
+                cpf = cpf.replace(" ","")
+                cpf = cpf.replace("-","")
+                cpf = cpf.replace(".","")
+                cpf = re.sub("(\d{3})(\d{3})(\d{3})(\d{2})",r"\1.\2.\3-\4",cpf)
+                if len(telefone) >= 11 and len(telefone) <= 15:
+                    telefone = telefone.replace(" ","")
+                    telefone = telefone.replace("-","")
+                    telefone = telefone.replace("(","")
+                    telefone = telefone.replace(")","")
+                    telefone = re.sub("(\d{2})(\d{5})(\d{4})",r"(\1)\2-\3",telefone)
+
+                    if re.match("(\w*)@(\w*)",email):
+                        update_usuario(self.id,nome,cpf,perfil,telefone,email,senha)
+                        messagebox.showinfo("SUCESSO!!","Editado com sucesso!!")
+                        self.root.destroy()
+                    else:
+                        messagebox.showinfo("Email inválido","Email inválido, confira antes de prosseguir")
+                else:
+                    messagebox.showinfo("Telefone inválido","O telefone deve ter no minimo 11 caracteres e no maximo 16")
+            else:
+                messagebox.showinfo("CPF invalido","CPF deve ter no minimo 11 caracteres e no maximo 14")    
+        else:
+            messagebox.showinfo("Atenção!!","Preencha todas os campos!!")
+   
 
 if __name__ == "__main__":
     root = CTk()
