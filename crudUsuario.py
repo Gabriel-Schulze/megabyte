@@ -1,11 +1,11 @@
 from utils import get_connection
 
 
-def create_usuario(nome,cpf,telefone,email,senha):
+def create_usuario(nome,cpf,telefone,perfil,email,senha):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "insert tb_usuario (nm_usuario,nr_cpf,nr_telefone,ds_email,ds_senha) VALUES(%s,%s,%s,%s,%s)"
-    cursor.execute(query,(nome,cpf,telefone,email,senha))
+    query = "insert tb_usuario (nm_usuario,nr_cpf,nr_telefone,ds_perfil,ds_email,ds_senha) VALUES(%s,%s,%s,%s,%s,%s)"
+    cursor.execute(query,(nome,cpf,telefone,perfil,email,senha))
     conn.commit()
     cursor.close()
     conn.close()
