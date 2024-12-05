@@ -3,12 +3,14 @@ from tkinter import Frame
 from PIL import Image
 from Inicio import Inicio
 from UsuarioMain import UsuarioMain
+import sys
 
 class Main:
     
     def __init__(self,user,root: CTk):
         self.user = user
         self.root = root
+        root.protocol("WM_DELETE_WINDOW", self.on_closing) 
         self.root.resizable(False, False)
         self.root.title("Pagina principal")
         self.root.geometry('1600x900+180+80')
@@ -28,7 +30,7 @@ class Main:
         self.frameAdm = Frame(self.frame2,background="white")
         self.frameAdm.grid(column=1,row=0)
         
-        logo = CTkImage(light_image=Image.open("admIcon.png"))
+        logo = CTkImage(light_image=Image.open("icons/admIcon.png"))
         
         CTkLabel(self.frameAdm, image=logo,text="").grid(column=1,row=0)
         CTkLabel(self.frameAdm, text="Administrador",font=("Open Sans",19)).grid(column=2,row=0)
@@ -69,10 +71,12 @@ class Main:
        
     def telaUsuario(self):
         for widgets in self.frame3.winfo_children():
+            print(widgets.grid_info())
             widgets.destroy()
         UsuarioMain("admin",self.frame3)  
         
-           
+    def on_closing(self, event=0): 
+            sys.exit()  
             
 if __name__ == "__main__":
     root = CTk()

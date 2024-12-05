@@ -30,6 +30,16 @@ def read_usuarioById(id):
     conn.close()
     return result
 
+def read_usuarioByName(nome):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "SELECT  id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf  FROM tb_usuario WHERE nm_usuario = %s"
+    cursor.execute(query,(nome,))
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
 def update_usuario(id_usuario,nome,cpf,perfil,telefone,email,senha):
     conn = get_connection()
     cursor = conn.cursor()
