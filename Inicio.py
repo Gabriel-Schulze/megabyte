@@ -7,7 +7,7 @@ class Inicio:
     
     def __init__(self,root: CTk):
         self.root = root
-        #self.root.geometry("1600x800")
+        
         
         self.criandoWidgets()
         
@@ -15,6 +15,8 @@ class Inicio:
         
         self.frame1 = Frame(self.root,background="darkblue")
         self.frame1.grid(column=2,row=2,columnspan=2)
+        self.frame1.config(width=1400,height=810)
+        self.frame1.pack_propagate(False)
         
         CTkLabel(self.frame1, text="Inicio").grid(column=2,row=1, columnspan=2)
         

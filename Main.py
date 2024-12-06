@@ -3,6 +3,7 @@ from tkinter import Frame
 from PIL import Image
 from Inicio import Inicio
 from UsuarioMain import UsuarioMain
+from ProdutoMain import ProdutoMain
 import sys
 
 class Main:
@@ -13,11 +14,12 @@ class Main:
         root.protocol("WM_DELETE_WINDOW", self.on_closing) 
         self.root.resizable(False, False)
         self.root.title("Pagina principal")
-        self.root.geometry('1600x900+180+80')
+        self.root.geometry('1600x810+180+80')
+        self.root.config(background="darkblue")
         
         self.fontMenu = ("Open Sans",22)
     
-        self.frame1 = Frame(self.root)
+        self.frame1 = Frame(self.root,background="darkblue")
         self.frame1.pack()
         
         self.criandoWidgets()
@@ -25,14 +27,17 @@ class Main:
     def criandoWidgets(self):
         
         self.frame2 = Frame(self.frame1,background="green")
-        self.frame2.grid(column=1,row=1,rowspan=2,sticky=N)
+        self.frame2.grid(column=1,row=1,rowspan=2)
+        self.frame2.config(width=210,height=810)
+        self.frame2.pack_propagate(False)
         
-        self.frameAdm = Frame(self.frame2,background="white")
-        self.frameAdm.grid(column=1,row=0)
         
-        logo = CTkImage(light_image=Image.open("icons/admIcon.png"))
+        self.frameAdm = Frame(self.frame2,background="green")
+        self.frameAdm.grid(column=1,row=0,columnspan=2,pady=(10,0))
         
-        CTkLabel(self.frameAdm, image=logo,text="").grid(column=1,row=0)
+        logoAdm = CTkImage(light_image=Image.open("icons/admIcon.png"))
+        
+        CTkLabel(self.frameAdm, image=logoAdm,text="").grid(column=1,row=0,padx=(0,5))
         CTkLabel(self.frameAdm, text="Administrador",font=("Open Sans",19)).grid(column=2,row=0)
         
         
@@ -47,12 +52,21 @@ class Main:
         
         self.produtoLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Produtos")
         self.produtoLink.grid(column=1,row=3, columnspan=2,pady=(10,20))
+        self.produtoLink.bind("<Button-1>", lambda e: self.telaProduto())
+        
         self.categLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Categorias")
         self.categLink.grid(column=1,row=4, columnspan=2,pady=(10,20))
-        self.fornLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Fornecedores")
+        self.fornLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Fornecedores",width=210)
         self.fornLink.grid(column=1,row=5, columnspan=2,pady=(10,276))
-        self.configLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Configurações")
-        self.configLink.grid(column=1,row=6, columnspan=2,pady=(10,20))
+        
+        self.frameConfig = Frame(self.frame2,background="green")
+        self.frameConfig.grid(column=1,row=6,columnspan=2)
+        
+        logoConfig = CTkImage(light_image=Image.open("icons/configureIcon.png"))
+        
+        CTkLabel(self.frameConfig, image=logoConfig,text="").grid(column=1,row=1,padx=(0,5))
+        self.configLink = CTkLabel(self.frameConfig,font=self.fontMenu ,text="Configurações")
+        self.configLink.grid(column=2,row=1)
         
         CTkLabel(self.frame2,text="Version 1.0").grid(column=1,row=7)
         CTkLabel(self.frame2 ,text="Logoff").grid(column=2,row=7)
@@ -71,10 +85,14 @@ class Main:
        
     def telaUsuario(self):
         for widgets in self.frame3.winfo_children():
-            print(widgets.grid_info())
             widgets.destroy()
-        UsuarioMain("admin",self.frame3)  
+        UsuarioMain(self.frame3)  
         
+    def telaProduto(self):
+        for widgets in self.frame3.winfo_children():
+            widgets.destroy()
+        ProdutoMain(self.frame3) 
+    
     def on_closing(self, event=0): 
             sys.exit()  
             

@@ -4,13 +4,13 @@ from crudCategoria import read_categoria
 from crudFornecedor import read_fornecedor
 from crudSubcategoria import read_subcategoria
 
-class editarProduto:
-    def __init__(self,root:CTk):
+class EditarProduto:
+    def __init__(self,root:CTk,id):
         self.root = root
         self.root.title("Editar de Produto")
         self.root.geometry('600x400+300+80')
 
-        CTkLabel(self.root,text="Editar de Produto",font=("Open Sans bold",28)).pack(pady=(30,10))#grid(column=1,row=1, columnspan=2, pady=(0,30))
+        CTkLabel(self.root,text="Editar de Produto",font=("Open Sans bold",28)).pack(pady=(30,10))
 
         self.frame1 = Frame(self.root)
         self.frame1.pack(anchor=W, padx=(50,0))
@@ -88,5 +88,5 @@ class editarProduto:
 
 if __name__ == "__main__":
     root = CTk()
-    app = editarProduto(root)
+    app = EditarProduto(root)
     root.mainloop()

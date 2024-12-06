@@ -1,11 +1,11 @@
 from customtkinter import *
 from tkinter import Frame,ttk
 from PIL import Image
-from crudUsuario import read_usuario,read_usuarioByName,delete_usuario
-from EditarUsuario import EditarUsuario
-from CadastroUsuario import CadastroUsuario
+from EditarProduto import EditarProduto
+from CadastroProduto import CadastroProduto
+from crudProduto import read_produto,read_produtoByName,delete_produto
 
-class UsuarioMain:
+class ProdutoMain:
     
     def __init__(self,root:Frame):
         self.root = root
@@ -17,9 +17,8 @@ class UsuarioMain:
         
     def createWidget(self):
         
-        CTkLabel(self.root,text="USUÁRIOS",font=("Open Sans bold",28)).pack(pady=(30,10))
+        CTkLabel(self.root,text="PRODUTOS",font=("Open Sans bold",28)).pack(pady=(30,10))
         
-        #CTkLabel(self.root,text="",width=1390).pack()
         
         self.frame1 = Frame(self.root)
         self.frame1.pack(anchor=W, padx=(50,0))
@@ -40,10 +39,10 @@ class UsuarioMain:
         self.btn_attTabela.grid(column=3,row=1)
 
         ttk.Label(self.frame2,text="Código",width=8,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=1,row=1)
-        ttk.Label(self.frame2,text="Nome",width=25,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=2,row=1)
-        ttk.Label(self.frame2,text="Telefone",width=15,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=3,row=1)
-        ttk.Label(self.frame2,text="E-mail",width=25,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=4,row=1)
-        ttk.Label(self.frame2,text="CPF",width=15,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=5,row=1)
+        ttk.Label(self.frame2,text="Descrição",width=45,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=2,row=1)
+        ttk.Label(self.frame2,text="Valor",width=8,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=3,row=1)
+        ttk.Label(self.frame2,text="Categoria",width=15,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=4,row=1)
+        ttk.Label(self.frame2,text="Subcategoria",width=15,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=5,row=1)
         ttk.Label(self.frame2,text="",width=12,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=6,row=1)
         
         self.createLinhaTabela()
@@ -53,16 +52,16 @@ class UsuarioMain:
       
     def createLinhaTabela(self,buscar = ""):
         if buscar:
-            data:list = read_usuarioByName(buscar)
+            data:list = read_produtoByName(buscar)
         else:
-            data:list = read_usuario()
+            data:list = read_produto()
         row=2
         
         for user in data:
             ttk.Label(self.frame2,text=user[0],width=8,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=1,row=row)
-            ttk.Label(self.frame2,text=user[1],width=25,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=2,row=row)
-            ttk.Label(self.frame2,text=user[2],width=15,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=3,row=row)
-            ttk.Label(self.frame2,text=user[3],width=25,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=4,row=row)
+            ttk.Label(self.frame2,text=user[1],width=45,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=2,row=row)
+            ttk.Label(self.frame2,text=user[2],width=8,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=3,row=row)
+            ttk.Label(self.frame2,text=user[3],width=15,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=4,row=row)
             ttk.Label(self.frame2,text=user[4],width=15,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=5,row=row)
             editar = ttk.Label(self.frame2,text="Editar",width=6,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER)
             editar.grid(column=6,row=row,sticky=W)
@@ -75,7 +74,7 @@ class UsuarioMain:
             row += 1
     
     def deletarUsuario(self,id):
-        delete_usuario(id)
+        delete_produto(id)
         for widgets in self.frame2.winfo_children():
             gridInfo = widgets.grid_info()
             if gridInfo["row"] >= 2:
@@ -98,18 +97,18 @@ class UsuarioMain:
         topEditar = CTkToplevel()
         topEditar.transient(self.root)
         topEditar.focus_force()
-        EditarUsuario(topEditar,id)
+        EditarProduto(topEditar,id)
         
     def telaCadastro(self):
         topCadastro = CTkToplevel()
         topCadastro.transient(self.root)
         topCadastro.focus_force()
-        CadastroUsuario(topCadastro)
+        CadastroProduto(topCadastro)
             
         
         
     
 if __name__ == "__main__":
     root = CTk()
-    app = UsuarioMain("admin",root)
+    app = ProdutoMain(root)
     root.mainloop()

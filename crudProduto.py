@@ -13,8 +13,68 @@ def create_produto(cd_produto,descricao,valor,quantidade,subcategoria,fornecedor
 def read_produto():
     conn = get_connection()
     cursor = conn.cursor()
-    query = "select * from tb_produto"
+    query = """
+        SELECT
+            p.cd_produto,
+            p.ds_produto,
+            p.vl_produto,
+            c.ds_categoria,
+            s.ds_subcategoria
+        FROM
+            tb_produto p
+        INNER JOIN tb_subcategoria s 
+        ON (p.id_subcategoria = s.id_subcategoria)
+        INNER JOIN tb_categoria c
+        ON (c.id_categoria = s.id_categoria)
+        ORDER BY p.cd_produto
+    """
     cursor.execute(query)
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
+def read_produtoById(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = """
+        SELECT 
+            cd_produto, 
+            ds_produto, 
+            vl_produto,
+            qt_produto, 
+            id_subcategoria,
+            id_fornecedor,
+            id_usuario 
+        FROM tb_usuario 
+        WHERE id_usuario = %s
+    """
+    cursor.execute(query,(id,))
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
+def read_produtoByName(nome):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = """
+        SELECT
+            p.cd_produto,
+            p.ds_produto,
+            p.vl_produto,
+            c.ds_categoria,
+            s.ds_subcategoria
+        FROM
+            tb_produto p
+        INNER JOIN tb_subcategoria s 
+        ON (p.id_subcategoria = s.id_subcategoria)
+        INNER JOIN tb_categoria c
+        ON (c.id_categoria = s.id_categoria)
+        WHERE p.ds_produto = %s
+        ORDER BY p.cd_produto
+    """
+    cursor.execute(query,(nome,))
     result = cursor.fetchall()
     cursor.close()
     conn.close()
