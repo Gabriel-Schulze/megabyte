@@ -33,8 +33,8 @@ def read_usuarioById(id):
 def read_usuarioByName(nome):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT  id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf  FROM tb_usuario WHERE nm_usuario = %s"
-    cursor.execute(query,(nome,))
+    query = f"""SELECT  id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf  FROM tb_usuario WHERE nm_usuario LIKE "%{nome}%" """
+    cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
     conn.close()

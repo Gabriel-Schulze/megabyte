@@ -1,11 +1,11 @@
 from utils import get_connection
 
 
-def create_produto(cd_produto,descricao,valor,quantidade,subcategoria,fornecedor):
+def create_produto(cd_produto,descricao,valor,quantidade,subcategoria,fornecedor,usuario):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "insert tb_produto VALUES(%s,%s,%s,%s,%s,%s)"
-    cursor.execute(query,(cd_produto,descricao,valor,quantidade,subcategoria,fornecedor))
+    query = "insert tb_produto VALUES(%s,%s,%s,%s,%s,%s,%s)"
+    cursor.execute(query,(cd_produto,descricao,valor,quantidade,subcategoria,fornecedor,usuario))
     conn.commit()
     cursor.close()
     conn.close()
@@ -66,7 +66,7 @@ def read_produtoById(id):
 def read_produtoByName(nome):
     conn = get_connection()
     cursor = conn.cursor()
-    query = """
+    query = f"""
         SELECT
             p.cd_produto,
             p.ds_produto,
@@ -79,10 +79,10 @@ def read_produtoByName(nome):
         ON (p.id_subcategoria = s.id_subcategoria)
         INNER JOIN tb_categoria c
         ON (c.id_categoria = s.id_categoria)
-        WHERE p.ds_produto = %s
+        WHERE p.ds_produto LIKE "%{nome}%"
         ORDER BY p.cd_produto
     """
-    cursor.execute(query,(nome,))
+    cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
     conn.close()
