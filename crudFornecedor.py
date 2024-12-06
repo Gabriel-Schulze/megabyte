@@ -20,6 +20,16 @@ def read_fornecedor():
     conn.close()
     return result
 
+def read_fornecedorByName(nome):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "select * from tb_fornecedor WHERE nm_empresa = %s"
+    cursor.execute(query,(nome,))
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
 def update_fornecedor(id_fornecedor,nome,cnpj,endereco,telefone):
     conn = get_connection()
     cursor = conn.cursor()

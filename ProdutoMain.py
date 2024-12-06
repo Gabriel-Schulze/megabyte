@@ -74,7 +74,7 @@ class ProdutoMain:
             row += 1
     
     def deletarUsuario(self,id):
-        delete_produto(id)
+        #delete_produto(id)
         for widgets in self.frame2.winfo_children():
             gridInfo = widgets.grid_info()
             if gridInfo["row"] >= 2:

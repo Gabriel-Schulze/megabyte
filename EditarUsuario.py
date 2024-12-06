@@ -114,7 +114,7 @@ class EditarUsuario:
 
 if __name__ == "__main__":
     root = CTk()
-    app = EditarUsuario(root)
+    app = EditarUsuario(root,1)
     root.mainloop()
     
 # id_usuario,nome,cpf,telefone,email,senha

@@ -20,6 +20,17 @@ def read_subcategoria(categoria):
     conn.close()
     return result
 
+def read_subcategoriaByName(categoria):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "SELECT * from tb_subcategoria WHERE ds_subcategoria = %s"
+    cursor.execute(query, (categoria,))
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
+
 def update_subcategoria(id_subcategoria,descricao,categoria):
     conn = get_connection()
     cursor = conn.cursor()
