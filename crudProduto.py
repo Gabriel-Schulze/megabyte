@@ -27,6 +27,7 @@ def read_produto():
         INNER JOIN tb_categoria c
         ON (c.id_categoria = s.id_categoria)
         ORDER BY p.cd_produto
+        LIMIT 10
     """
     cursor.execute(query)
     result = cursor.fetchall()

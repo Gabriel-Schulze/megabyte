@@ -7,7 +7,7 @@ class Inicio:
     
     def __init__(self,root: CTk):
         self.root = root
-        
+        root.protocol("WM_DELETE_WINDOW", self.on_closing) 
         
         self.criandoWidgets()
         
@@ -56,7 +56,10 @@ class Inicio:
         # Adição do gráfico ao frame usando FigureCanvasTkAgg
         canvas = FigureCanvasTkAgg(fig, master=self.frame2)
         canvas.draw()
-        canvas.get_tk_widget().grid(column=2,row=1,padx=(5,10),pady=10)        
+        canvas.get_tk_widget().grid(column=2,row=1,padx=(5,10),pady=10)   
+        
+    def on_closing(self, event=0): 
+        sys.exit()       
 
 if __name__ == "__main__":
     root = CTk()

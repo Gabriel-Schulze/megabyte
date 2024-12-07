@@ -13,7 +13,7 @@ def create_usuario(nome,cpf,telefone,perfil,email,senha):
 def read_usuario():
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf FROM tb_usuario ORDER BY id_usuario LIMIT 7"
+    query = "SELECT id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf FROM tb_usuario ORDER BY id_usuario LIMIT 10"
     cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()

@@ -1,11 +1,11 @@
 from utils import get_connection
 
 
-def create_fornecedor(nome,cnpj,endereco,telefone):
+def create_fornecedor(nome,cnpj,endereco,telefone,id_usuario):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "insert tb_fornecedor (nm_empresa,nr_cnpj,ds_endereco,nr_telefone) VALUES(%s,%s,%s,%s)"
-    cursor.execute(query,(nome,cnpj,endereco,telefone))
+    query = "insert tb_fornecedor (nm_empresa,nr_cnpj,ds_endereco,nr_telefone,id_usuario) VALUES(%s,%s,%s,%s,%s)"
+    cursor.execute(query,(nome,cnpj,endereco,telefone,id_usuario))
     conn.commit()
     cursor.close()
     conn.close()
@@ -13,8 +13,18 @@ def create_fornecedor(nome,cnpj,endereco,telefone):
 def read_fornecedor():
     conn = get_connection()
     cursor = conn.cursor()
-    query = "select * from tb_fornecedor"
+    query = "SELECT id_fornecedor, nm_empresa, nr_cnpj, ds_endereco, nr_telefone FROM tb_fornecedor ORDER BY id_fornecedor LIMIT 10"
     cursor.execute(query)
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
+def read_fornecedorById(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "SELECT nm_empresa, nr_cnpj, ds_endereco, nr_telefone FROM tb_fornecedor WHERE id_fornecedor = %s"
+    cursor.execute(query,(id,))
     result = cursor.fetchall()
     cursor.close()
     conn.close()
@@ -23,8 +33,8 @@ def read_fornecedor():
 def read_fornecedorByName(nome):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "select * from tb_fornecedor WHERE nm_empresa = %s"
-    cursor.execute(query,(nome,))
+    query = f"""SELECT id_fornecedor, nm_empresa, nr_cnpj, ds_endereco, nr_telefone FROM tb_fornecedor WHERE nm_empresa LIKE "%{nome}%" """
+    cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
     conn.close()
