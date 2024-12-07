@@ -30,12 +30,23 @@ def read_usuarioById(id):
     conn.close()
     return result
 
+
 def read_usuarioByName(nome):
     conn = get_connection()
     cursor = conn.cursor()
     query = f"""SELECT  id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf  FROM tb_usuario WHERE nm_usuario LIKE "%{nome}%" """
     cursor.execute(query)
     result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
+def verify_usuario(email,senha):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "SELECT ds_perfil, nm_usuario FROM tb_usuario WHERE ds_email = %s AND ds_senha = %s"
+    cursor.execute(query, (email,senha))
+    result = cursor.fetchone()
     cursor.close()
     conn.close()
     return result

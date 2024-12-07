@@ -5,6 +5,7 @@ from Inicio import Inicio
 from UsuarioMain import UsuarioMain
 from ProdutoMain import ProdutoMain
 import sys
+import subprocess
 
 class Main:
     
@@ -38,8 +39,9 @@ class Main:
         logoAdm = CTkImage(light_image=Image.open("icons/admIcon.png"))
         
         CTkLabel(self.frameAdm, image=logoAdm,text="").grid(column=1,row=0,padx=(0,5))
-        CTkLabel(self.frameAdm, text="Administrador",font=("Open Sans",19)).grid(column=2,row=0)
         
+        CTkLabel(self.frameAdm, text=sys.argv[2],font=("Open Sans",19)).grid(column=2,row=0)
+            
         
         self.inicioLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Inicio")
         self.inicioLink.grid(column=1,row=1, columnspan=2,pady=(150,20))
@@ -57,7 +59,7 @@ class Main:
         self.categLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Categorias")
         self.categLink.grid(column=1,row=4, columnspan=2,pady=(10,20))
         self.fornLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Fornecedores",width=210)
-        self.fornLink.grid(column=1,row=5, columnspan=2,pady=(10,276))
+        self.fornLink.grid(column=1,row=5, columnspan=2,pady=(10,266))
         
         self.frameConfig = Frame(self.frame2,background="green")
         self.frameConfig.grid(column=1,row=6,columnspan=2)
@@ -68,15 +70,19 @@ class Main:
         self.configLink = CTkLabel(self.frameConfig,font=self.fontMenu ,text="Configurações")
         self.configLink.grid(column=2,row=1)
         
-        CTkLabel(self.frame2,text="Version 1.0").grid(column=1,row=7)
-        CTkLabel(self.frame2 ,text="Logoff").grid(column=2,row=7)
-        
+        CTkLabel(self.frame2,text="Version 1.0",anchor=S).grid(column=1,row=7,sticky=W,padx=5)
+        self.btn_Logoof = CTkLabel(self.frame2 ,text="Logoff",font=("Open Sans",18),text_color="darkred")
+        self.btn_Logoof.grid(column=2,row=7,pady=(10,0))
+        self.btn_Logoof.bind("<Button-1>", lambda e: self.logOff() )
         
         self.frame3 = Frame(self.frame1)
         self.frame3.grid(column=2,row=1,rowspan=2)
         
         self.inicio = Inicio(self.frame3)
         
+    def logOff(self):
+        subprocess.Popen([sys.executable,"telaLogin.py"])
+        sys.exit()
      
     def telaInicio(self):
         for widgets in self.frame3.winfo_children():
@@ -98,5 +104,5 @@ class Main:
             
 if __name__ == "__main__":
     root = CTk()
-    app = Main("admin",root)
+    app = Main(sys.argv[1],root)
     root.mainloop()
