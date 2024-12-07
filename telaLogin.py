@@ -46,7 +46,7 @@ class telaLogin:
             subprocess.Popen([sys.executable,"Main.py",userExiste[0],userExiste[1]])
             sys.exit()
         else:
-            messagebox.showinfo("Atenção!!","Usuario não existe")
+            messagebox.showinfo("Login inválido!!","Verifique se as infomações então corretas, ou contate um administrador para novo cadastro")
 
 if __name__ == "__main__":
     root = CTk()

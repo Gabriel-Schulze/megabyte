@@ -2,12 +2,13 @@ from customtkinter import *
 from tkinter import Frame
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from crudProduto import read_produtoByLowStock
 
 class Inicio:
     
     def __init__(self,root: CTk):
         self.root = root
-        root.protocol("WM_DELETE_WINDOW", self.on_closing) 
+        #root.protocol("WM_DELETE_WINDOW", self.on_closing) 
         
         self.criandoWidgets()
         
@@ -18,10 +19,18 @@ class Inicio:
         self.frame1.config(width=1400,height=810)
         self.frame1.pack_propagate(False)
         
-        CTkLabel(self.frame1, text="Inicio").grid(column=2,row=1, columnspan=2)
+        #CTkLabel(self.frame1, text="Inicio").grid(column=2,row=1, columnspan=2)
         
+        self.frameEstoque = Frame(self.frame1,width=1370,height=380)
+        self.frameEstoque.grid(column=1,row=1,columnspan=2,pady=10)
+        self.frameEstoque.pack_propagate(False)
+        CTkLabel(self.frameEstoque,text="ESTOQUE EM NÍVEL CRÍTICO:",font=("Open Sans",24),text_color="red",height=10).grid(column=1,row=1)
+        self.estoqueTextBox = CTkTextbox(self.frameEstoque,width=1370,height=370,font=("Open Sans",22), text_color="red",fg_color="#EEEEEE")
+        self.estoqueTextBox.tag_config("center", justify='center')
+        self.estoqueTextBox.grid(column=1,row=2)
         
-        CTkLabel(self.frame1,text="PLACEHOLDER",width=1370,height=380,bg_color="grey").grid(column=1,row=1,columnspan=2,pady=10)
+        self.carregaEstoque()
+        
         
         self.frame2 = Frame(self.frame1,background="darkblue")
         self.frame2.grid(column=2,row=3)
@@ -29,6 +38,13 @@ class Inicio:
         self.criar_grafico_pizza()
 
         self.criar_grafico_colunas()
+        
+    def carregaEstoque(self):
+        estoque = read_produtoByLowStock()
+        
+        for produto in estoque:
+            self.estoqueTextBox.insert(END,f"Produto: {produto[1]}, {produto[0]} peças  \n")
+            self.estoqueTextBox.tag_add("center", "1.0", "end")
         
     def criar_grafico_pizza(self):
         categorias = ['Mouse', 'Teclado', 'Monitor', 'Placa de Video']

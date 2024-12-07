@@ -107,9 +107,11 @@ class Main:
             widgets.destroy()
         FornecedorMain(self.frame3) 
     
-    def on_closing(self, event=0): 
+    def on_closing(self, event=0):
+        subprocess.Popen([sys.executable,"telaLogin.py"]) 
         sys.exit()  
-            
+    
+    
 if __name__ == "__main__":
     root = CTk()
     app = Main(sys.argv[1],root)

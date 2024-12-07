@@ -89,6 +89,16 @@ def read_produtoByName(nome):
     conn.close()
     return result
 
+def read_produtoByLowStock():
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "SELECT qt_produto,ds_produto FROM tb_produto WHERE qt_produto <= 10"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
 def update_produto(codigoNovo,descricao,valor,quantidade,subcategoria,fornecedor,codigoAtual):
     conn = get_connection()
     cursor = conn.cursor()
