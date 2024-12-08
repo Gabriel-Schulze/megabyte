@@ -4,6 +4,7 @@ from PIL import Image
 from Inicio import Inicio
 from UsuarioMain import UsuarioMain
 from ProdutoMain import ProdutoMain
+from CategoriaMain import CategoriaMain
 from FornecedorMain import FornecedorMain
 import sys
 import subprocess
@@ -59,6 +60,7 @@ class Main:
         
         self.categLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Categorias")
         self.categLink.grid(column=1,row=4, columnspan=2,pady=(10,20))
+        self.categLink.bind("<Button-1>", lambda e: self.telaCategoria())
         
         self.fornLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Fornecedores",width=210)
         self.fornLink.grid(column=1,row=5, columnspan=2,pady=(10,266))
@@ -102,6 +104,11 @@ class Main:
             widgets.destroy()
         ProdutoMain(self.frame3) 
         
+    def telaCategoria(self):
+        for widgets in self.frame3.winfo_children():
+            widgets.destroy()
+        CategoriaMain(self.frame3) 
+    
     def telaFornecedor(self):
         for widgets in self.frame3.winfo_children():
             widgets.destroy()
