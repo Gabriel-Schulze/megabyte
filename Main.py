@@ -76,7 +76,7 @@ class Main:
         self.configLink.grid(column=2,row=1)
         
         CTkLabel(self.frame2,text="Version 1.0",anchor=S).grid(column=1,row=7,sticky=W,padx=5)
-        self.btn_Logoof = CTkLabel(self.frame2 ,text="Logoff",font=("Open Sans",18),text_color="darkred")
+        self.btn_Logoof = CTkLabel(self.frame2 ,text="LogOff",font=("Open Sans",18),text_color="darkred")
         self.btn_Logoof.grid(column=2,row=7,pady=(10,0))
         self.btn_Logoof.bind("<Button-1>", lambda e: self.logOff() )
         

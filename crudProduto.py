@@ -92,7 +92,7 @@ def read_produtoByName(nome):
 def read_produtoByLowStock():
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT qt_produto,ds_produto FROM tb_produto WHERE qt_produto <= 10"
+    query = "SELECT qt_produto,ds_produto FROM tb_produto WHERE qt_produto <= 10 LIMIT 10"
     cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
