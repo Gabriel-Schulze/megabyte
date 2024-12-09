@@ -1,6 +1,5 @@
 from customtkinter import *
 from tkinter import Frame,ttk
-from crudCategoria import read_categoria
 
 class telaLogin:
     def __init__(self,root:CTk):
@@ -16,9 +15,7 @@ class telaLogin:
         self.frame2.pack(anchor=W, padx=(50,0))
         self.frame3 = Frame(self.root)
         self.frame3.pack()
-        
-        self.data_usuario = read_categoria()        
-        self.data_senha = ()
+     
         self.createWidget()
 
     def createWidget(self):
