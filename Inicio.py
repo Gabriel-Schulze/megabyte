@@ -29,6 +29,7 @@ class Inicio:
         self.estoqueTextBox.tag_config("center", justify='center')
         self.estoqueTextBox.grid(column=1,row=2)
         
+        
         self.carregaEstoque()
         
         
@@ -45,6 +46,8 @@ class Inicio:
         for produto in estoque:
             self.estoqueTextBox.insert(END,f"Produto: {produto[1]}, {produto[0]} peças  \n")
             self.estoqueTextBox.tag_add("center", "1.0", "end")
+            
+        self.estoqueTextBox.configure(state="disabled")
         
     def criar_grafico_pizza(self):
         categorias = ['Mouse', 'Teclado', 'Monitor', 'Placa de Video']
