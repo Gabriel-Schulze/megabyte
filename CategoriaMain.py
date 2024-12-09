@@ -17,17 +17,17 @@ class CategoriaMain:
         
     def createWidget(self):
         
-        CTkLabel(self.root,text="SUBCATEGORIAS",font=("Open Sans bold",28)).pack(pady=(30,10))
+        CTkLabel(self.root,text_color="#fff",bg_color="#0322a2",text="SUBCATEGORIAS",font=("Open Sans bold",28)).pack(pady=(30,10))
         
-        self.frame1 = Frame(self.root)
+        self.frame1 = Frame(self.root,background="#0322a2")
         self.frame1.pack(anchor=SE, padx=330,pady=(100,5))
         self.frame2 = Frame(self.root)
         self.frame2.pack(anchor=CENTER, padx=(50,0))
-        self.frame3 = Frame(self.root)
+        self.frame3 = Frame(self.root,background="#0322a2")
         self.frame3.pack(side="bottom",anchor=W)
         
         logoRefresh = CTkImage(light_image=Image.open("icons/refreshIcon.png"))
-        self.btn_refresh = CTkButton(self.frame1,text="",image=logoRefresh,width=10,command=lambda: self.createLinhaTabela(1))
+        self.btn_refresh = CTkButton(self.frame1,fg_color="#fff",text="",image=logoRefresh,width=10,command=lambda: self.createLinhaTabela(1))
         self.btn_refresh.grid(column=1,row=1)
         
         self.frameLeft = Frame(self.frame2)
@@ -57,7 +57,7 @@ class CategoriaMain:
         
         self.createLinhaTabela(categoria=1)
 
-        self.btn_cadastrar = CTkButton(self.frame3, text="Cadastrar",width=120 ,command=self.telaCadastro,font=("Open Sans bold",16))
+        self.btn_cadastrar = CTkButton(self.frame3,text_color="#000",fg_color="#fff", text="Cadastrar",width=120 ,command=self.telaCadastro,font=("Open Sans bold",16))
         self.btn_cadastrar.grid(column=2,row=1, padx=50,pady=100)
       
     def createLinhaTabela(self,categoria):

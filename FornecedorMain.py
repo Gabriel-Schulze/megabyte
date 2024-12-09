@@ -17,25 +17,25 @@ class FornecedorMain:
         
     def createWidget(self):
         
-        CTkLabel(self.root,text="FORNECEDORES",font=("Open Sans bold",28)).pack(pady=(30,10))
+        CTkLabel(self.root,bg_color="#0322a2",text_color="#fff",text="FORNECEDORES",font=("Open Sans bold",28)).pack(pady=(30,10))
         
         
-        self.frame1 = Frame(self.root)
+        self.frame1 = Frame(self.root,background="#0322a2")
         self.frame1.pack(anchor=W, padx=(50,0))
-        self.frame2 = Frame(self.root)
+        self.frame2 = Frame(self.root,background="#0322a2")
         self.frame2.pack(anchor=W, padx=(50,0))
-        self.frame3 = Frame(self.root)
+        self.frame3 = Frame(self.root,background="#0322a2")
         self.frame3.pack(side="bottom",anchor=W)
         
         self.buscar_entry = CTkEntry(self.frame1,width=350,placeholder_text="Buscar por nome")
         self.buscar_entry.grid(column=1,row=1)
         
         iconeBuscar = CTkImage(light_image=Image.open("icons/searchIcon.png"))
-        self.btn_buscar = CTkButton(self.frame1,image=iconeBuscar,text="",width=16, command=self.buscarFornecedor)
+        self.btn_buscar = CTkButton(self.frame1,fg_color="#fff",image=iconeBuscar,text="",width=16, command=self.buscarFornecedor)
         self.btn_buscar.grid(column=2,row=1,pady=20,padx=5)
         
         iconeRecarregar = CTkImage(light_image=Image.open("icons/refreshIcon.png"))
-        self.btn_attTabela = CTkButton(self.frame1,image=iconeRecarregar,text="",width=16,command=self.createLinhaTabela) 
+        self.btn_attTabela = CTkButton(self.frame1,fg_color="#fff",image=iconeRecarregar,text="",width=16,command=self.createLinhaTabela) 
         self.btn_attTabela.grid(column=3,row=1)
 
         ttk.Label(self.frame2,text="Código",width=6,font=self.fontLabel,borderwidth=2,relief="solid",anchor=CENTER).grid(column=1,row=1)
@@ -47,7 +47,7 @@ class FornecedorMain:
         
         self.createLinhaTabela()
 
-        self.btn_cadastrar = CTkButton(self.frame3, text="Cadastrar",width=120 ,command=self.telaCadastro,font=("Open Sans bold",16))
+        self.btn_cadastrar = CTkButton(self.frame3,fg_color="#fff",text_color="#000", text="Cadastrar",width=120 ,command=self.telaCadastro,font=("Open Sans bold",16))
         self.btn_cadastrar.grid(column=2,row=1, padx=50,pady=100)
       
     def createLinhaTabela(self,buscar = ""):

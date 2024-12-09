@@ -14,7 +14,7 @@ class Inicio:
         
     def criandoWidgets(self):
         
-        self.frame1 = Frame(self.root,background="darkblue")
+        self.frame1 = Frame(self.root,background="#0322a2")
         self.frame1.grid(column=2,row=2,columnspan=2)
         self.frame1.config(width=1400,height=810)
         self.frame1.pack_propagate(False)
@@ -32,7 +32,7 @@ class Inicio:
         self.carregaEstoque()
         
         
-        self.frame2 = Frame(self.frame1,background="darkblue")
+        self.frame2 = Frame(self.frame1,background="#0322a2")
         self.frame2.grid(column=2,row=3)
         
         self.criar_grafico_pizza()

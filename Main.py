@@ -63,8 +63,11 @@ class Main:
         self.categLink.bind("<Button-1>", lambda e: self.telaCategoria())
         
         self.fornLink = CTkLabel(self.frame2,font=self.fontMenu ,text="Fornecedores",width=210)
-        self.fornLink.grid(column=1,row=5, columnspan=2,pady=(10,266))
+        self.fornLink.grid(column=1,row=5, columnspan=2,pady=(10,280))
         self.fornLink.bind("<Button-1>", lambda e: self.telaFornecedor())
+
+        if self.user != "admin":
+            self.fornLink.grid(column=1,row=5, columnspan=2,pady=(10,340))
         
         self.frameConfig = Frame(self.frame2,background="green")
         self.frameConfig.grid(column=1,row=6,columnspan=2)
@@ -80,7 +83,7 @@ class Main:
         self.btn_Logoof.grid(column=2,row=7,pady=(10,0))
         self.btn_Logoof.bind("<Button-1>", lambda e: self.logOff() )
         
-        self.frame3 = Frame(self.frame1)
+        self.frame3 = Frame(self.frame1,background="#0322a2")
         self.frame3.grid(column=2,row=1,rowspan=2)
         
         self.inicio = Inicio(self.frame3)
