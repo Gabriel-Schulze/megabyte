@@ -13,7 +13,7 @@ def create_usuario(nome,cpf,telefone,perfil,email,senha):
 def read_usuario():
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf FROM tb_usuario ORDER BY id_usuario LIMIT 7"
+    query = "SELECT id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf FROM tb_usuario ORDER BY id_usuario LIMIT 10"
     cursor.execute(query)
     result = cursor.fetchall()
     cursor.close()
@@ -30,12 +30,23 @@ def read_usuarioById(id):
     conn.close()
     return result
 
+
 def read_usuarioByName(nome):
     conn = get_connection()
     cursor = conn.cursor()
-    query = "SELECT  id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf  FROM tb_usuario WHERE nm_usuario = %s"
-    cursor.execute(query,(nome,))
+    query = f"""SELECT  id_usuario, nm_usuario, nr_telefone, ds_email, nr_cpf  FROM tb_usuario WHERE nm_usuario LIKE "%{nome}%" """
+    cursor.execute(query)
     result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return result
+
+def verify_usuario(email,senha):
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = "SELECT ds_perfil, nm_usuario FROM tb_usuario WHERE ds_email = %s AND ds_senha = %s"
+    cursor.execute(query, (email,senha))
+    result = cursor.fetchone()
     cursor.close()
     conn.close()
     return result
