@@ -109,7 +109,7 @@ class CadastroProduto:
     def gerarCodigoNovo(self):
         while True:
             self.codigo_entry.delete(0,END)
-            codigo = random.randint(1,255)
+            codigo = random.randint(1,125)
             codigoExiste = read_produtoById(codigo)
             
             if codigoExiste:
