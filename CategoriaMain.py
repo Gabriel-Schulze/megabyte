@@ -1,9 +1,10 @@
 from customtkinter import *
-from tkinter import Frame,ttk
+from tkinter import Frame,ttk,messagebox
 from PIL import Image
 from crudSubcategoria import delete_subcategoria,read_subcategoriaByCategoria
 from CadastroCategoria import CadastroCategoria
 from EditarCategoria import EditarCategoria
+import mysql.connector.errors
 
 class CategoriaMain:
     
@@ -83,13 +84,15 @@ class CategoriaMain:
             row += 1
     
     def deletarUsuario(self,id):
-        delete_subcategoria(id)
-        for widgets in self.frame2.winfo_children():
-            gridInfo = widgets.grid_info()
-            if gridInfo["row"] >= 2:
-                widgets.destroy()
-        self.createLinhaTabela(categoria=1)
-    
+        try:
+            delete_subcategoria(id)
+            for widgets in self.frame2.winfo_children():
+                gridInfo = widgets.grid_info()
+                if gridInfo["row"] >= 2:
+                    widgets.destroy()
+            self.createLinhaTabela(categoria=1)
+        except mysql.connector.Error:
+            messagebox.showerror("Impossível deletar","Impossível deletar pois há produtos vinculados a está subcategoria")
     def highlightCategoria(self,categoria):
 
         if categoria == 1:

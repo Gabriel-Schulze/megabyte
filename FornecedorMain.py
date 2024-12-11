@@ -1,9 +1,10 @@
 from customtkinter import *
-from tkinter import Frame,ttk
+from tkinter import Frame,ttk,messagebox
 from PIL import Image
 from crudFornecedor import read_fornecedorByName,read_fornecedor,delete_fornecedor
 from EditarFornecedor import EditarFornecedor
 from CadastroFornecedor import CadastroFornecedor
+import mysql.connector.errors
 
 class FornecedorMain:
     
@@ -74,12 +75,15 @@ class FornecedorMain:
             row += 1
     
     def deletarFornecedor(self,id):
-        delete_fornecedor(id)
-        for widgets in self.frame2.winfo_children():
-            gridInfo = widgets.grid_info()
-            if gridInfo["row"] >= 2:
-                widgets.destroy()
-        self.createLinhaTabela()
+        try:
+            delete_fornecedor(id)
+            for widgets in self.frame2.winfo_children():
+                gridInfo = widgets.grid_info()
+                if gridInfo["row"] >= 2:
+                    widgets.destroy()
+            self.createLinhaTabela()
+        except mysql.connector.Error:
+            messagebox.showerror("Impossível deletar","Impossível deletar pois há produtos vinculados a esse fornecedor")
     
     def buscarFornecedor(self):
         nome = self.buscar_entry.get()
